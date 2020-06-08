@@ -1,6 +1,17 @@
+import Utils.DBConnect;
+
+import java.sql.SQLException;
+
 public class Main{
     public static void main(String[] args){
-        System.out.println("Hello World!!!!!!!");
-        System.out.println("GitHub DeskTop Test");
+        DBConnect db=null;
+        try{
+            db=new DBConnect();
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        new LoginFrame(db);
     }
 }
