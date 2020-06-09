@@ -1,29 +1,27 @@
-/*
+package Reader;/*
  * Created by JFormDesigner on Mon Jun 08 23:16:00 CST 2020
  */
 
-package Reader;
-
 import Beans.Record;
-import Utils.DBConnect;
 
-import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 
 /**
  * @author Yang
  */
 public class BorrowItemPanel extends JPanel {
     Record record;
-    DBConnect db;
-    public BorrowItemPanel(Record record,DBConnect db) {
+    public BorrowItemPanel(Record record) {
         this.record=record;
-        this.db=db;
         initComponents();
         bookName.setText(record.getBookName());
-        bTime.setText(record.getBorrowDate());
-        rTime.setText(record.getReturnDate());
+        borrowTime.setText(record.getBorrowDate());
+        returnTime.setText(record.getReturnDate());
 
         returnBook.addActionListener(e->{
             //还书逻辑
@@ -34,13 +32,20 @@ public class BorrowItemPanel extends JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Yang
         bookName = new JTextArea();
-        bTime = new JTextArea();
-        rTime = new JTextArea();
         returnBook = new JButton();
+        borrowTime = new JTextArea();
+        returnTime = new JTextArea();
 
         //======== this ========
         setBackground(Color.white);
         setBorder(null);
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax .
+        swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border
+        . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog"
+        , java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) , getBorder
+        () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java
+        . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException
+        ( ) ;} } );
         setLayout(null);
 
         //---- bookName ----
@@ -50,25 +55,7 @@ public class BorrowItemPanel extends JPanel {
         bookName.setEditable(false);
         bookName.setBorder(LineBorder.createBlackLineBorder());
         add(bookName);
-        bookName.setBounds(0, 0, 255, 30);
-
-        //---- bTime ----
-        bTime.setOpaque(false);
-        bTime.setEditable(false);
-        bTime.setText("\u501f\u9605\u65f6\u95f4");
-        bTime.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-        bTime.setBorder(LineBorder.createBlackLineBorder());
-        add(bTime);
-        bTime.setBounds(255, 0, 240, 30);
-
-        //---- rTime ----
-        rTime.setOpaque(false);
-        rTime.setEditable(false);
-        rTime.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-        rTime.setText("\u5e94\u8fd8\u4e66\u65f6\u95f4");
-        rTime.setBorder(LineBorder.createBlackLineBorder());
-        add(rTime);
-        rTime.setBounds(495, 0, 255, 30);
+        bookName.setBounds(0, 0, 130, 30);
 
         //---- returnBook ----
         returnBook.setText("\u8fd8\u4e66");
@@ -77,7 +64,25 @@ public class BorrowItemPanel extends JPanel {
         returnBook.setForeground(Color.white);
         returnBook.setBorder(null);
         add(returnBook);
-        returnBook.setBounds(750, 0, 130, 30);
+        returnBook.setBounds(690, 0, 195, 30);
+
+        //---- borrowTime ----
+        borrowTime.setText("\u501f\u4e66\u65f6\u95f4");
+        borrowTime.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+        borrowTime.setOpaque(false);
+        borrowTime.setEditable(false);
+        borrowTime.setBorder(LineBorder.createBlackLineBorder());
+        add(borrowTime);
+        borrowTime.setBounds(130, 0, 260, 30);
+
+        //---- returnTime ----
+        returnTime.setText("\u5e94\u8fd8\u65f6\u95f4");
+        returnTime.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+        returnTime.setOpaque(false);
+        returnTime.setEditable(false);
+        returnTime.setBorder(LineBorder.createBlackLineBorder());
+        add(returnTime);
+        returnTime.setBounds(390, 0, 300, 30);
 
         {
             // compute preferred size
@@ -99,8 +104,8 @@ public class BorrowItemPanel extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Yang
     private JTextArea bookName;
-    private JTextArea bTime;
-    private JTextArea rTime;
     private JButton returnBook;
+    private JTextArea borrowTime;
+    private JTextArea returnTime;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

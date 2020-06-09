@@ -4,9 +4,7 @@
 
 package Reader;
 
-import Beans.Reader;
 import Beans.Record;
-import Utils.DBConnect;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,11 +14,9 @@ import javax.swing.*;
  * @author Yang
  */
 public class BorrowInfoPanel extends JPanel{
-    DBConnect db;
     ArrayList<Record> records;
 
-    public BorrowInfoPanel(DBConnect db){
-        this.db=db;
+    public BorrowInfoPanel(){
         initComponents();
         init();
     }
@@ -53,9 +49,9 @@ public class BorrowInfoPanel extends JPanel{
             c=new GridBagConstraints();
             c.gridwidth=GridBagConstraints.REMAINDER;
             c.fill=GridBagConstraints.BOTH;
-            BorrowItemPanel briefPanel=new BorrowItemPanel(records.get(i),db);
-            gridBag.addLayoutComponent(briefPanel,c);
-            panel1.add(briefPanel);
+            BorrowItemPanel borrowItemPanel=new BorrowItemPanel(records.get(i));
+            gridBag.addLayoutComponent(borrowItemPanel,c);
+            panel1.add(borrowItemPanel);
         }
 
     }
@@ -68,13 +64,12 @@ public class BorrowInfoPanel extends JPanel{
 
         //======== this ========
         setOpaque(false);
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-        swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border
-        . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog"
-        ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder
-        ( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-        .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException
-        ( ); }} );
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border
+        .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax
+        . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,
+        12 ) ,java . awt. Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans
+        .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e.
+        getPropertyName () ) )throw new RuntimeException( ) ;} } );
         setLayout(null);
 
         //======== scrollPane1 ========

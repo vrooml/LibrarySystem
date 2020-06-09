@@ -1,27 +1,16 @@
-/*
+package PublicComp;/*
  * Created by JFormDesigner on Mon Jun 08 11:56:38 CST 2020
  */
 
-import Reader.ReaderFrame;
-import Utils.DBConnect;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  * @author Yang
  */
 public class LoginFrame extends JFrame{
-    DBConnect db;
 
-    public LoginFrame(DBConnect db){
-        this.db=db;
+    public LoginFrame(){
         initComponents();
         init();
     }
@@ -35,14 +24,14 @@ public class LoginFrame extends JFrame{
         login.addActionListener(e->{
             //登录逻辑
 
-//            new ReaderFrame(db);
+//            new AdminFrame(db);
 //            or
 //            new AdminFrame(db);
         });
 
         //注册按钮监听
         register.addActionListener(e->{
-            new RegisterFrame(db);
+            new RegisterFrame();
         });
 
     }

@@ -4,22 +4,42 @@
 
 package Reader;
 
+import Beans.Book;
+import Beans.Reader;
+import Beans.Record;
+
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
  * @author Yang
  */
 public class BookDetailFrame extends JFrame {
-    public BookDetailFrame() {
+    Book book;
+    Reader reader;
+    public BookDetailFrame(Book book,Reader reader) {
+        this.book=book;
+        this.reader=reader;
         initComponents();
     }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Yang
         panel1 = new JPanel();
-        label1 = new JLabel();
+        cover = new JLabel();
+        title = new JTextArea();
+        authors = new JTextArea();
+        publisher = new JTextArea();
+        publishTime = new JTextArea();
+        ISBN = new JTextArea();
+        textArea6 = new JTextArea();
+        textArea7 = new JTextArea();
+        textArea8 = new JTextArea();
+        textArea9 = new JTextArea();
+        button2 = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -28,20 +48,108 @@ public class BookDetailFrame extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(Color.white);
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-            swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border
-            . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067"
-            ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder
-            ( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-            .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException
-            ( ); }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder (
+            0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder
+            . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .
+            red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java .
+            beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
             panel1.setLayout(null);
 
-            //---- label1 ----
-            label1.setBackground(Color.lightGray);
-            label1.setOpaque(true);
-            panel1.add(label1);
-            label1.setBounds(55, 40, 125, 170);
+            //---- cover ----
+            cover.setBackground(Color.white);
+            cover.setOpaque(true);
+            panel1.add(cover);
+            cover.setBounds(40, 60, 150, 215);
+
+            //---- title ----
+            title.setFocusable(false);
+            title.setOpaque(false);
+            title.setEditable(false);
+            title.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 20));
+            title.setText("\u4e66\u540d");
+            panel1.add(title);
+            title.setBounds(220, 60, 100, 35);
+
+            //---- authors ----
+            authors.setFocusable(false);
+            authors.setOpaque(false);
+            authors.setEditable(false);
+            authors.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+            authors.setText("\u672a\u77e5");
+            panel1.add(authors);
+            authors.setBounds(305, 125, 250, 25);
+
+            //---- publisher ----
+            publisher.setFocusable(false);
+            publisher.setOpaque(false);
+            publisher.setEditable(false);
+            publisher.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+            publisher.setText("\u672a\u77e5");
+            panel1.add(publisher);
+            publisher.setBounds(305, 160, 250, 25);
+
+            //---- publishTime ----
+            publishTime.setFocusable(false);
+            publishTime.setOpaque(false);
+            publishTime.setEditable(false);
+            publishTime.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+            publishTime.setText("\u672a\u77e5");
+            panel1.add(publishTime);
+            publishTime.setBounds(305, 195, 250, 25);
+
+            //---- ISBN ----
+            ISBN.setFocusable(false);
+            ISBN.setOpaque(false);
+            ISBN.setEditable(false);
+            ISBN.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+            ISBN.setText("\u672a\u77e5");
+            panel1.add(ISBN);
+            ISBN.setBounds(305, 230, 250, 25);
+
+            //---- textArea6 ----
+            textArea6.setFocusable(false);
+            textArea6.setOpaque(false);
+            textArea6.setEditable(false);
+            textArea6.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+            textArea6.setText("\u4f5c\u8005\uff1a");
+            panel1.add(textArea6);
+            textArea6.setBounds(225, 125, 60, 25);
+
+            //---- textArea7 ----
+            textArea7.setFocusable(false);
+            textArea7.setOpaque(false);
+            textArea7.setEditable(false);
+            textArea7.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+            textArea7.setText("\u51fa\u7248\u793e\uff1a");
+            panel1.add(textArea7);
+            textArea7.setBounds(225, 160, 60, 25);
+
+            //---- textArea8 ----
+            textArea8.setFocusable(false);
+            textArea8.setOpaque(false);
+            textArea8.setEditable(false);
+            textArea8.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+            textArea8.setText("\u51fa\u7248\u65f6\u95f4\uff1a");
+            panel1.add(textArea8);
+            textArea8.setBounds(225, 195, 80, 25);
+
+            //---- textArea9 ----
+            textArea9.setFocusable(false);
+            textArea9.setOpaque(false);
+            textArea9.setEditable(false);
+            textArea9.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+            textArea9.setText("ISBN\uff1a");
+            panel1.add(textArea9);
+            textArea9.setBounds(225, 230, 80, 25);
+
+            //---- button2 ----
+            button2.setText("\u501f\u4e66");
+            button2.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
+            button2.setBackground(new Color(89, 143, 209));
+            button2.setForeground(Color.white);
+            button2.setBorder(null);
+            panel1.add(button2);
+            button2.setBounds(150, 350, 305, 30);
 
             {
                 // compute preferred size
@@ -83,6 +191,16 @@ public class BookDetailFrame extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Yang
     private JPanel panel1;
-    private JLabel label1;
+    private JLabel cover;
+    private JTextArea title;
+    private JTextArea authors;
+    private JTextArea publisher;
+    private JTextArea publishTime;
+    private JTextArea ISBN;
+    private JTextArea textArea6;
+    private JTextArea textArea7;
+    private JTextArea textArea8;
+    private JTextArea textArea9;
+    private JButton button2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

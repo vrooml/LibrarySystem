@@ -1,3 +1,5 @@
+package PublicComp;
+
 import Utils.DBConnect;
 
 import java.sql.SQLException;
