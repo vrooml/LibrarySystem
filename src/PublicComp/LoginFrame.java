@@ -1,0 +1,232 @@
+package PublicComp;/*
+ * Created by JFormDesigner on Mon Jun 08 11:56:38 CST 2020
+ */
+
+<<<<<<< HEAD
+<<<<<<< HEAD:src/LoginFrame.java
+import Reader.ReaderFrame;
+import Utils.DBConnect;
+import Utils.SHA1Encryption;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.SQLException;
+=======
+import java.awt.*;
+>>>>>>> c3fae78858b7688a45e1e92810e653b165b3c98d:src/PublicComp/LoginFrame.java
+=======
+import java.awt.*;
+>>>>>>> c3fae78858b7688a45e1e92810e653b165b3c98d
+import javax.swing.*;
+
+/**
+ * @author Yang
+ */
+public class LoginFrame extends JFrame{
+
+    public LoginFrame(){
+        initComponents();
+        init();
+    }
+
+    private void init(){
+        //jradiobutton二选一监听
+        ButtonGroup group=new ButtonGroup();
+        group.add(readerButton);
+        group.add(adminButton);
+
+        login.addActionListener(e->{
+            //登录逻辑
+<<<<<<< HEAD
+            try {
+                String id = accountField.getText();
+                String password = String.valueOf(passwordField1.getPassword());
+                System.out.print(password);
+                //password = SHA1Encryption.getSHA1(password);  //密码加密
+                int loginStatue;  //记录登录状态
+                DBConnect db = new DBConnect();
+                if(readerButton.isSelected()){    //读者登录
+                    loginStatue = db.readerLogin(id, password); //调用数据库读者登陆接口
+                    if(loginStatue == 0) {  //登陆成功
+                        new ReaderFrame(id);
+                        this.setVisible(false);  //登陆成功，隐藏当前窜口
+                    }
+
+                }
+                else {     //管理员登录
+                    loginStatue = db.adminLogin(id, password); //调用数据库管理员登陆接口
+                    if(loginStatue == 0) {
+                        //new AdminFrame();
+                        this.setVisible(false);  //登陆成功，隐藏当前窜口
+                    }
+                }
+
+                if(loginStatue == 1)  //账号不存在
+                    JOptionPane.showMessageDialog(null,"账号不存在","Error",JOptionPane.ERROR_MESSAGE);
+                else if(loginStatue == 2) //账号密码不匹配
+                    JOptionPane.showMessageDialog(null,"账号与密码不匹配","Error",JOptionPane.ERROR_MESSAGE);
+
+
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+=======
+>>>>>>> c3fae78858b7688a45e1e92810e653b165b3c98d
+
+//            new AdminFrame(db);
+//            or
+//            new AdminFrame(db);
+        });
+
+        //注册按钮监听
+        register.addActionListener(e->{
+            new RegisterFrame();
+        });
+
+    }
+
+    private void initComponents(){
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - Yang
+        textArea2=new JTextArea();
+        accountField=new JTextField();
+        textArea3=new JTextArea();
+        passwordField1=new JPasswordField();
+        login=new JButton();
+        register=new JButton();
+        textArea1=new JTextArea();
+        readerButton=new JRadioButton();
+        adminButton=new JRadioButton();
+        label1=new JLabel();
+
+        //======== this ========
+        setVisible(true);
+        setResizable(false);
+        Container contentPane=getContentPane();
+        contentPane.setLayout(null);
+
+<<<<<<< HEAD
+        //---- textArea2 ----  账号框
+=======
+        //---- textArea2 ----
+>>>>>>> c3fae78858b7688a45e1e92810e653b165b3c98d
+        textArea2.setText("\u8d26\u53f7");
+        textArea2.setFocusable(false);
+        textArea2.setOpaque(false);
+        textArea2.setEditable(false);
+        textArea2.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1",Font.PLAIN,14));
+        contentPane.add(textArea2);
+        textArea2.setBounds(100,205,35,20);
+        contentPane.add(accountField);
+        accountField.setBounds(100,225,340,30);
+
+<<<<<<< HEAD
+        //---- textArea3 ----  密码框
+=======
+        //---- textArea3 ----
+>>>>>>> c3fae78858b7688a45e1e92810e653b165b3c98d
+        textArea3.setText("\u5bc6\u7801");
+        textArea3.setFocusable(false);
+        textArea3.setOpaque(false);
+        textArea3.setEditable(false);
+        textArea3.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1",Font.PLAIN,14));
+        contentPane.add(textArea3);
+        textArea3.setBounds(100,280,35,20);
+        contentPane.add(passwordField1);
+        passwordField1.setBounds(100,300,340,30);
+
+        //---- login ----
+        login.setText("\u767b\u5f55");
+        login.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1",Font.PLAIN,14));
+        login.setBackground(new Color(89,143,209));
+        login.setForeground(Color.white);
+        contentPane.add(login);
+        login.setBounds(120,390,115,25);
+
+        //---- register ----
+        register.setText("\u6ce8\u518c");
+        register.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1",Font.PLAIN,14));
+        register.setBackground(new Color(89,143,209));
+        register.setForeground(Color.white);
+        contentPane.add(register);
+        register.setBounds(305,390,115,25);
+
+        //---- textArea1 ----
+        textArea1.setText("\u6b22\u8fce\u4f7f\u7528\u56fe\u4e66\u7ba1\u7406\u7cfb\u7edf");
+        textArea1.setFocusable(false);
+        textArea1.setOpaque(false);
+        textArea1.setEditable(false);
+        textArea1.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1",Font.PLAIN,26));
+        contentPane.add(textArea1);
+        textArea1.setBounds(135,75,270,35);
+
+        //---- readerButton ----
+        readerButton.setText("\u8bfb\u8005");
+        readerButton.setOpaque(false);
+        readerButton.setSelected(true);
+        contentPane.add(readerButton);
+        readerButton.setBounds(new Rectangle(new Point(160,175),readerButton.getPreferredSize()));
+
+        //---- adminButton ----
+        adminButton.setText("\u7ba1\u7406\u5458");
+        adminButton.setOpaque(false);
+        contentPane.add(adminButton);
+        adminButton.setBounds(320,175,65,19);
+
+        //---- label1 ----
+        label1.setIcon(new ImageIcon(getClass().getResource("/Source/background.png")));
+        label1.setFocusable(false);
+        contentPane.add(label1);
+        label1.setBounds(0,0,530,440);
+
+        {
+            // compute preferred size
+            Dimension preferredSize=new Dimension();
+            for(int i=0;i<contentPane.getComponentCount();i++){
+                Rectangle bounds=contentPane.getComponent(i).getBounds();
+                preferredSize.width=Math.max(bounds.x+bounds.width,preferredSize.width);
+                preferredSize.height=Math.max(bounds.y+bounds.height,preferredSize.height);
+            }
+            Insets insets=contentPane.getInsets();
+            preferredSize.width+=insets.right;
+            preferredSize.height+=insets.bottom;
+            contentPane.setMinimumSize(preferredSize);
+            contentPane.setPreferredSize(preferredSize);
+        }
+        pack();
+        setLocationRelativeTo(getOwner());
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> c3fae78858b7688a45e1e92810e653b165b3c98d
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - Yang
+    private JTextArea textArea2;
+    private JTextField accountField;
+    private JTextArea textArea3;
+    private JPasswordField passwordField1;
+    private JButton login;
+    private JButton register;
+    private JTextArea textArea1;
+    private JRadioButton readerButton;
+    private JRadioButton adminButton;
+
+    private JLabel label1;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
+<<<<<<< HEAD
+
+    public static void main(String[] args) {
+        new LoginFrame();
+    }
+=======
+>>>>>>> c3fae78858b7688a45e1e92810e653b165b3c98d
+}
