@@ -4,15 +4,17 @@ public class Reader{
     int readerId;
     String name;
     String password;
-    int phoneNumber;
+    String phoneNumber;
     int limits;
+    String address;
 
-    public Reader(int readerId,String name,String password,int phoneNumber,int limits){
+    public Reader(int readerId,String name,String password,String address,String phoneNumber,int limits){
         this.readerId=readerId;
         this.name=name;
         this.password=password;
         this.phoneNumber=phoneNumber;
         this.limits=limits;
+        this.address=address;
     }
 
     public int getReaderId(){
@@ -39,11 +41,11 @@ public class Reader{
         this.password=password;
     }
 
-    public int getPhoneNumber(){
+    public String getPhoneNumber(){
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber){
+    public void setPhoneNumber(String phoneNumber){
         this.phoneNumber=phoneNumber;
     }
 
@@ -53,5 +55,13 @@ public class Reader{
 
     public void setLimits(int limits){
         this.limits=limits;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
