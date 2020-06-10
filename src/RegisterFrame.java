@@ -3,8 +3,12 @@
  */
 
 import Utils.DBConnect;
+import Utils.SHA1Encryption;
 
 import java.awt.*;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.*;
 
 /**
@@ -13,14 +17,33 @@ import javax.swing.*;
 public class RegisterFrame extends JFrame{
     DBConnect db;
 
-    public RegisterFrame(DBConnect db){
-        this.db=db;
+    public RegisterFrame(){
         initComponents();
         init();
     }
 
     private void init(){
         //按钮监听及判空逻辑等
+        //给确定注册按钮添加监听器
+
+        button1.addActionListener(e -> {
+            int id = 0;
+            Map<String,Object> registerMes = new HashMap<String, Object>();
+            registerMes.put("name",textField1.getText());  //获取用户输入的信息
+            registerMes.put("readerPassword",SHA1Encryption.getSHA1(textField2.getText()));  //密码加密
+            registerMes.put("address",textField3.getText());
+            registerMes.put("phoneNumber",textField4.getText());
+            try {
+                DBConnect db = new DBConnect();
+                id = db.readerRegist(registerMes);
+                JOptionPane.showMessageDialog(null,"你的账号为：" + id + "\n务必牢记！！！","注册成功",JOptionPane.INFORMATION_MESSAGE);
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        });
+
     }
 
     private void initComponents(){
@@ -157,4 +180,9 @@ public class RegisterFrame extends JFrame{
     private JTextField textField4;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+
+    public static void main(String[] args) {
+        new RegisterFrame();
+    }
 }

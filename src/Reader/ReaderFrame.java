@@ -18,8 +18,10 @@ public class ReaderFrame extends JFrame {
     SearchPanel searchPanel;
     ReaderInfoPanel readerInfoPanel;
     BorrowInfoPanel borrowInfoPanel;
-    public ReaderFrame(DBConnect db) {
-        this.db=db;
+    String id;
+
+    public ReaderFrame(String id) {
+        this.id=new String(id);
         initComponents();
         init();
     }
@@ -157,13 +159,13 @@ public class ReaderFrame extends JFrame {
     private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public static void main(String[] args){
-        try{
-            new ReaderFrame(new DBConnect());
-        }catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args){
+//        try{
+//            new ReaderFrame(new DBConnect());
+//        }catch(ClassNotFoundException e){
+//            e.printStackTrace();
+//        }catch(SQLException e){
+//            e.printStackTrace();
+//        }
+//    }
 }
