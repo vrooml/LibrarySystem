@@ -13,8 +13,8 @@ new FormModel {
 					"background": sfield java.awt.Color white
 					"opaque": true
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 40
-					"y": 60
+					"x": 45
+					"y": 15
 					"width": 150
 					"height": 215
 				} )
@@ -28,8 +28,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 100
 					"height": 35
-					"x": 220
-					"y": 60
+					"x": 225
+					"y": 15
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "authors"
@@ -41,8 +41,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 250
 					"height": 25
-					"x": 305
-					"y": 125
+					"x": 310
+					"y": 80
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "publisher"
@@ -54,8 +54,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 250
 					"height": 25
-					"x": 305
-					"y": 160
+					"x": 310
+					"y": 115
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "publishTime"
@@ -67,8 +67,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 250
 					"height": 25
-					"x": 305
-					"y": 195
+					"x": 310
+					"y": 150
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "ISBN"
@@ -80,8 +80,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 250
 					"height": 25
-					"x": 305
-					"y": 230
+					"x": 310
+					"y": 185
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "textArea6"
@@ -93,8 +93,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 60
 					"height": 25
-					"x": 225
-					"y": 125
+					"x": 230
+					"y": 80
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "textArea7"
@@ -106,8 +106,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 60
 					"height": 25
-					"x": 225
-					"y": 160
+					"x": 230
+					"y": 115
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "textArea8"
@@ -119,8 +119,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 80
 					"height": 25
-					"x": 225
-					"y": 195
+					"x": 230
+					"y": 150
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "textArea9"
@@ -132,11 +132,11 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 80
 					"height": 25
-					"x": 225
-					"y": 230
+					"x": 230
+					"y": 185
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
+					name: "borrowBook"
 					"text": "借书"
 					"font": new java.awt.Font( "微软雅黑", 0, 14 )
 					"background": new java.awt.Color( 89, 143, 209, 255 )
@@ -146,7 +146,20 @@ new FormModel {
 					"width": 305
 					"height": 30
 					"x": 150
-					"y": 350
+					"y": 410
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0:1.0"
+					"$rowSpecs": "0:1.0"
+					"$alignTop": true
+					"$alignLeft": true
+				} ) {
+					name: "panel2"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 525
+					"height": 135
+					"x": 40
+					"y": 260
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
