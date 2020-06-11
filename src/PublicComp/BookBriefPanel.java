@@ -2,12 +2,19 @@
  * Created by JFormDesigner on Mon Jun 08 22:33:49 CST 2020
  */
 
-package Reader;
+package PublicComp;
 
 import javax.swing.border.*;
+
+import Admin.AdminBookDetailFrame;
+import Admin.AdminFrame;
 import Beans.Book;
+import Beans.Reader;
+import Reader.BookDetailFrame;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 
 /**
@@ -15,14 +22,45 @@ import javax.swing.*;
  */
 public class BookBriefPanel extends JPanel {
     Book bookInfo;
-    public BookBriefPanel(Book book) {
+    Reader reader;
+    int source;
+    public BookBriefPanel(Book book,Reader reader,int source) {
         this.bookInfo=book;
+        this.reader=reader;
+        this.source=source;
         initComponents();
         if(bookInfo.getCover()!=null){
             bookCover.setIcon(bookInfo.getCover());
         }
         bookName.setText(bookInfo.getTitle());
         bookAuthor.setText(bookInfo.getAuthors());
+
+        this.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(source==1){
+                    new AdminBookDetailFrame(book);
+                }else{
+                    new BookDetailFrame(book,reader);
+                }
+            }
+            @Override
+            public void mousePressed(MouseEvent e){
+
+            }
+            @Override
+            public void mouseReleased(MouseEvent e){
+
+            }
+            @Override
+            public void mouseEntered(MouseEvent e){
+
+            }
+            @Override
+            public void mouseExited(MouseEvent e){
+
+            }
+        });
     }
 
     private void initComponents() {
@@ -37,12 +75,6 @@ public class BookBriefPanel extends JPanel {
         setOpaque(false);
         setPreferredSize(new Dimension(110, 210));
         setBorder(null);
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-        border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER
-        , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font
-        .BOLD ,12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (
-        new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order"
-        .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
         setLayout(null);
 
         //---- bookCover ----
