@@ -52,6 +52,7 @@ public class DBConnect {
         String cnt = new String();
         try {
             connect();
+            statement = connection.createStatement();
             String sql = "select count(*) from userlogin where readerId = \"" + ID + "\";";   //构建sql语句，查询ID是否存在
             resultSet = statement.executeQuery(sql);
             while(resultSet.next())
@@ -80,6 +81,7 @@ public class DBConnect {
         String cnt = new String();
         try{
             connect();
+            statement = connection.createStatement();
             String sql = "select count(*) from adminlogin where adminId = \"" + ID + "\";";   //构建sql语句，查询ID是否存在
             resultSet = statement.executeQuery(sql);
             while(resultSet.next())
@@ -111,7 +113,10 @@ public class DBConnect {
         int ret = 1;
         try{
             connect();
+            statement = connection.createStatement();
             if(isReaderIdExist(ID)){
+                connect();
+                statement = connection.createStatement();
                 sql = "select count(*) from userlogin where readerId = \"" + ID + "\" and readerPassword = \"" + password + "\";";
                 resultSet = statement.executeQuery(sql);   //sql语句执行
                 while(resultSet.next())
@@ -148,7 +153,10 @@ public class DBConnect {
         int ret = 1;
         try {
             connect();
+            statement = connection.createStatement();
             if (isAdminIdExist(ID)) {
+                connect();
+                statement = connection.createStatement();
                 sql = "select count(*) from adminlogin where adminId = \"" + ID + "\" and adminPassword = \"" + password + "\";";
                 resultSet = statement.executeQuery(sql);   //sql语句执行
                 while (resultSet.next())
@@ -190,6 +198,7 @@ public class DBConnect {
         int id = 0;
         try {
             connect();
+            statement = connection.createStatement();
             connection.setAutoCommit(false);  //关闭connection的自动提交
             //将账号密码插入到userLogin表的sql
             String sql1 = String.format("insert into userLogin values(null,\"%s\");", map.get("readerPassword"));
@@ -251,6 +260,7 @@ public class DBConnect {
         Vector<Map<String,Object>> booksMes = new Vector<Map<String, Object>>();
         try {
             connect();
+            statement = connection.createStatement();
             String sql = String.format(
                     "select ISBN,title,authors,cover from bookinformation " +
                             "where title like \'%%%s%%\' or ISBN = \'%s\' or authors like \'%%%s%%\' " +
@@ -769,9 +779,10 @@ public class DBConnect {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DBConnect db=new DBConnect();
-        Scanner scanner=new Scanner(System.in);
-        System.out.println(db.borrowBook(new Record(0,100012,6,null,
-                "2000-2-1","2001-2-1")));
+//        Scanner scanner=new Scanner(System.in);
+//        System.out.println(db.borrowBook(new Record(0,100012,6,null,
+//                "2000-2-1","2001-2-1")));
+        System.out.print(db.selectBooksInf("骆驼祥子"));
     }
 
 
