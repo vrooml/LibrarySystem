@@ -1,7 +1,8 @@
-/*
+package PublicComp;/*
  * Created by JFormDesigner on Mon Jun 08 11:56:38 CST 2020
  */
 
+import PublicComp.RegisterFrame;
 import Reader.ReaderFrame;
 import Utils.DBConnect;
 import Utils.SHA1Encryption;

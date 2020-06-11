@@ -1,4 +1,4 @@
-/*
+package PublicComp;/*
  * Created by JFormDesigner on Mon Jun 08 18:05:12 CST 2020
  */
 

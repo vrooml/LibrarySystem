@@ -1,3 +1,5 @@
+package PublicComp;
+
 import Utils.DBConnect;
 
 import java.sql.SQLException;
@@ -12,6 +14,6 @@ public class Main{
         }catch(SQLException e){
             e.printStackTrace();
         }
-        new LoginFrame(db);
+        new LoginFrame();
     }
 }

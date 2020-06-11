@@ -16,8 +16,10 @@ public class ReaderFrame extends JFrame{
     SearchPanel searchPanel;
     ReaderInfoPanel readerInfoPanel;
     BorrowInfoPanel borrowInfoPanel;
+    String id;
 
-    public ReaderFrame(){
+    public ReaderFrame(String id){
+        this.id=id;
         initComponents();
         init();
     }
@@ -156,8 +158,4 @@ public class ReaderFrame extends JFrame{
     private JPanel cardPanel;
     private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-
-    public static void main(String[] args){
-        new ReaderFrame();
-    }
 }
