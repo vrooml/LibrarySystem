@@ -66,6 +66,15 @@ public class SearchPanel extends JPanel{
 
         //请求books
 
+
+        //添加searchButton的监听
+//        searchButton.addActionListener(e -> {
+//            try{
+//
+//            }catch(){
+//
+//            }
+//        });
     }
 
 
@@ -73,7 +82,7 @@ public class SearchPanel extends JPanel{
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Yang
         textField1=new JTextField();
-        button1=new JButton();
+        searchButton=new JButton();
         scrollPane1=new JScrollPane();
         panel1=new JPanel();
 
@@ -87,14 +96,14 @@ public class SearchPanel extends JPanel{
         add(textField1);
         textField1.setBounds(215,35,510,25);
 
-        //---- button1 ----
-        button1.setIcon(new ImageIcon(getClass().getResource("/Source/search.png")));
-        button1.setBorder(LineBorder.createBlackLineBorder());
-        button1.setBorderPainted(false);
-        button1.setOpaque(false);
-        button1.setBackground(Color.white);
-        add(button1);
-        button1.setBounds(740,35,25,25);
+        //---- searchButton ----
+        searchButton.setIcon(new ImageIcon(getClass().getResource("/Source/search.png")));
+        searchButton.setBorder(LineBorder.createBlackLineBorder());
+        searchButton.setBorderPainted(false);
+        searchButton.setOpaque(false);
+        searchButton.setBackground(Color.white);
+        add(searchButton);
+        searchButton.setBounds(740,35,25,25);
 
         //======== scrollPane1 ========
         {
@@ -138,7 +147,7 @@ public class SearchPanel extends JPanel{
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Yang
     private JTextField textField1;
-    private JButton button1;
+    private JButton searchButton;
     private JScrollPane scrollPane1;
     private JPanel panel1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

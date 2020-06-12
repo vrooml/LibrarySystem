@@ -5,34 +5,95 @@
 package Reader;
 
 import Utils.DBConnect;
+import Beans.Reader;
 
 import java.awt.*;
+import java.sql.SQLException;
 import javax.swing.*;
 
 /**
  * @author Yang
  */
 public class ReaderInfoPanel extends JPanel{
-    public ReaderInfoPanel(){
+    int readerId;
+    Reader reader;
+
+    public ReaderInfoPanel(String id){
+        this.readerId=Integer.parseInt(id);
         initComponents();
         init();
     }
 
     private void init(){
-        //填充info数据
+        setReaderInformation();
+
+        //添加修改信息监听器
+        alterButton.addActionListener(e -> {
+            if(alterButton.getText().equals("修改信息")){
+                System.out.println("修改信息");
+                alterButton.setText("完成");
+                addressField.setEditable(true);
+                phoneField.setEditable(true);
+            }else{
+                System.out.println("完成");
+                Reader newReader=new Reader(reader);
+                newReader.setAddress(addressField.getText());
+                newReader.setPhoneNumber(phoneField.getText());
+                try {
+                    DBConnect db = new DBConnect();
+                    int condition=db.modifyReaderInformation(newReader);
+                    System.out.println(condition);
+                    if(condition==0){
+                        JOptionPane.showMessageDialog(this,"修改成功");
+                    }else if(condition==1){
+                        JOptionPane.showMessageDialog(this,"传入信息有误");
+                    }else{
+                        JOptionPane.showMessageDialog(this,"系统异常","错误",JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                setReaderInformation();
+            }
+        });
     }
 
+    //通过readerId获取读者信息，并显示
+    private void setReaderInformation(){
+        //用readerId获取读者信息并显示
+        try {
+            DBConnect db = new DBConnect();
+            reader=new Reader(db.queryReaderInformation(readerId));
+            nameArea.setText(reader.getName());
+            addressField.setText(reader.getAddress());
+            phoneField.setText(reader.getPhoneNumber());
+            limitsDisplayArea.setText(String.valueOf(reader.getLimits()));
+            alterButton.setText("修改信息");
+            addressField.setEditable(false);
+            phoneField.setEditable(false);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
     private void initComponents(){
+
+
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Yang
-        textArea1 = new JTextArea();
-        textArea2 = new JTextArea();
-        textField1 = new JTextField();
-        textArea3 = new JTextArea();
-        textField2 = new JTextField();
-        textArea4 = new JTextArea();
-        button1 = new JButton();
-        textArea5 = new JTextArea();
+        nameArea = new JTextArea();
+        addressArea = new JTextArea();
+        addressField = new JTextField();
+        phoneArea = new JTextArea();
+        phoneField = new JTextField();
+        limitsArea = new JTextArea();
+        alterButton = new JButton();
+        limitsDisplayArea = new JTextArea();
 
         //======== this ========
         setPreferredSize(new Dimension(940, 470));
@@ -47,76 +108,76 @@ public class ReaderInfoPanel extends JPanel{
         setLayout(null);
 
         //---- textArea1 ----
-        textArea1.setFocusable(false);
-        textArea1.setOpaque(false);
-        textArea1.setEditable(false);
-        textArea1.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 26));
-        textArea1.setText("\u7528\u6237\u540d");
-        add(textArea1);
-        textArea1.setBounds(215, 90, 100, 35);
+        nameArea.setFocusable(false);
+        nameArea.setOpaque(false);
+        nameArea.setEditable(false);
+        nameArea.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 26));
+        nameArea.setText("\u7528\u6237\u540d");
+        add(nameArea);
+        nameArea.setBounds(215, 90, 100, 35);
 
         //---- textArea2 ----
-        textArea2.setFocusable(false);
-        textArea2.setOpaque(false);
-        textArea2.setEditable(false);
-        textArea2.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-        textArea2.setText("\u5730\u5740\uff1a");
-        add(textArea2);
-        textArea2.setBounds(215, 155, 70, 25);
+        addressArea.setFocusable(false);
+        addressArea.setOpaque(false);
+        addressArea.setEditable(false);
+        addressArea.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+        addressArea.setText("\u5730\u5740\uff1a");
+        add(addressArea);
+        addressArea.setBounds(215, 155, 70, 25);
 
         //---- textField1 ----
-        textField1.setOpaque(false);
-        textField1.setBackground(Color.white);
-        textField1.setEditable(false);
-        textField1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
-        textField1.setText("\u6b63\u5728\u67e5\u8be2...");
-        add(textField1);
-        textField1.setBounds(305, 155, 430, 25);
+        addressField.setOpaque(false);
+        addressField.setBackground(Color.white);
+        addressField.setEditable(false);
+        addressField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
+        addressField.setText("\u6b63\u5728\u67e5\u8be2...");
+        add(addressField);
+        addressField.setBounds(305, 155, 430, 25);
 
         //---- textArea3 ----
-        textArea3.setFocusable(false);
-        textArea3.setOpaque(false);
-        textArea3.setEditable(false);
-        textArea3.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-        textArea3.setText("\u7535\u8bdd\u53f7\u7801\uff1a");
-        add(textArea3);
-        textArea3.setBounds(215, 210, 80, 25);
+        phoneArea.setFocusable(false);
+        phoneArea.setOpaque(false);
+        phoneArea.setEditable(false);
+        phoneArea.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+        phoneArea.setText("\u7535\u8bdd\u53f7\u7801\uff1a");
+        add(phoneArea);
+        phoneArea.setBounds(215, 210, 80, 25);
 
         //---- textField2 ----
-        textField2.setOpaque(false);
-        textField2.setBackground(Color.white);
-        textField2.setEditable(false);
-        textField2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
-        textField2.setText("\u6b63\u5728\u67e5\u8be2...");
-        add(textField2);
-        textField2.setBounds(305, 210, 430, 25);
+        phoneField.setOpaque(false);
+        phoneField.setBackground(Color.white);
+        phoneField.setEditable(false);
+        phoneField.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
+        phoneField.setText("\u6b63\u5728\u67e5\u8be2...");
+        add(phoneField);
+        phoneField.setBounds(305, 210, 430, 25);
 
         //---- textArea4 ----
-        textArea4.setFocusable(false);
-        textArea4.setOpaque(false);
-        textArea4.setEditable(false);
-        textArea4.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-        textArea4.setText("\u501f\u9605\u9650\u989d\uff1a");
-        add(textArea4);
-        textArea4.setBounds(215, 265, 85, 25);
+        limitsArea.setFocusable(false);
+        limitsArea.setOpaque(false);
+        limitsArea.setEditable(false);
+        limitsArea.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+        limitsArea.setText("\u501f\u9605\u9650\u989d\uff1a");
+        add(limitsArea);
+        limitsArea.setBounds(215, 265, 85, 25);
 
         //---- button1 ----
-        button1.setText("\u4fee\u6539\u4fe1\u606f");
-        button1.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
-        button1.setBackground(new Color(89, 143, 209));
-        button1.setForeground(Color.white);
-        button1.setBorder(null);
-        add(button1);
-        button1.setBounds(320, 365, 305, 30);
+        alterButton.setText("\u4fee\u6539\u4fe1\u606f");
+        alterButton.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
+        alterButton.setBackground(new Color(89, 143, 209));
+        alterButton.setForeground(Color.white);
+        alterButton.setBorder(null);
+        add(alterButton);
+        alterButton.setBounds(320, 365, 305, 30);
 
         //---- textArea5 ----
-        textArea5.setFocusable(false);
-        textArea5.setOpaque(false);
-        textArea5.setEditable(false);
-        textArea5.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-        textArea5.setText("\u6b63\u5728\u67e5\u8be2...");
-        add(textArea5);
-        textArea5.setBounds(310, 265, 85, 25);
+        limitsDisplayArea.setFocusable(false);
+        limitsDisplayArea.setOpaque(false);
+        limitsDisplayArea.setEditable(false);
+        limitsDisplayArea.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+        limitsDisplayArea.setText("\u6b63\u5728\u67e5\u8be2...");
+        add(limitsDisplayArea);
+        limitsDisplayArea.setBounds(310, 265, 85, 25);
 
         {
             // compute preferred size
@@ -137,13 +198,13 @@ public class ReaderInfoPanel extends JPanel{
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Yang
-    private JTextArea textArea1;
-    private JTextArea textArea2;
-    private JTextField textField1;
-    private JTextArea textArea3;
-    private JTextField textField2;
-    private JTextArea textArea4;
-    private JButton button1;
-    private JTextArea textArea5;
+    private JTextArea nameArea;
+    private JTextArea addressArea;
+    private JTextField addressField;
+    private JTextArea phoneArea;
+    private JTextField phoneField;
+    private JTextArea limitsArea;
+    private JButton alterButton;
+    private JTextArea limitsDisplayArea;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

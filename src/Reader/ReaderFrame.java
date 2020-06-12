@@ -5,8 +5,10 @@
 package Reader;
 
 import PublicComp.SearchPanel;
+import Utils.DBConnect;
 
 import java.awt.*;
+import java.sql.SQLException;
 import javax.swing.*;
 
 /**
@@ -16,17 +18,18 @@ public class ReaderFrame extends JFrame{
     SearchPanel searchPanel;
     ReaderInfoPanel readerInfoPanel;
     BorrowInfoPanel borrowInfoPanel;
-    String id;
+    String readerId;
 
-    public ReaderFrame(String id){
-        this.id=id;
+    public ReaderFrame(String readerId){
+        this.readerId=readerId;
         initComponents();
         init();
     }
 
     private void init(){
+
         searchPanel=new SearchPanel(2);
-        readerInfoPanel=new ReaderInfoPanel();
+        readerInfoPanel=new ReaderInfoPanel(readerId);
         borrowInfoPanel=new BorrowInfoPanel();
         cardPanel.add(searchPanel,"search");
         cardPanel.add(readerInfoPanel,"reader");
@@ -158,4 +161,6 @@ public class ReaderFrame extends JFrame{
     private JPanel cardPanel;
     private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    public static void main(String args[]){new ReaderFrame("1");}
 }
