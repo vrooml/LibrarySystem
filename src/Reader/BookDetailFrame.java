@@ -6,11 +6,10 @@ package Reader;
 
 import Beans.Book;
 import Beans.Reader;
-import Beans.Record;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.*;
 
 /**
  * @author Yang
@@ -27,16 +26,8 @@ public class BookDetailFrame extends JFrame {
 
     private void init(){
 
-        //请求有哪些id并填充arraylist(应该只显示没被借走的)
-        ArrayList<Integer> ids=new ArrayList<>();
+        //请求有哪些id并填充jlist
 
-        ButtonGroup group=new ButtonGroup();
-        for(int i=0;i<ids.size();i++){
-            JRadioButton jRadioButton=new JRadioButton(String.valueOf(ids.get(i)));
-
-            group.add(jRadioButton);
-            panel2.add(jRadioButton);
-        }
 
         borrowBook.addActionListener(e->{
             //获取选中的jradiobutton中的id并提交请求
@@ -62,20 +53,23 @@ public class BookDetailFrame extends JFrame {
         textArea9 = new JTextArea();
         borrowBook = new JButton();
         panel2 = new JPanel();
+        scrollPane1 = new JScrollPane();
+        idList = new JList();
 
         //======== this ========
+        setVisible(true);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
         //======== panel1 ========
         {
             panel1.setBackground(Color.white);
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
-            .border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder
-            .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.
-            awt.Font.BOLD,12),java.awt.Color.red),panel1. getBorder()))
-            ;panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-            ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}})
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder
+            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .
+            awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
+            ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
             ;
             panel1.setLayout(null);
 
@@ -177,11 +171,29 @@ public class BookDetailFrame extends JFrame {
 
             //======== panel2 ========
             {
-                panel2.setLayout(new GridBagLayout());
-                ((GridBagLayout)panel2.getLayout()).columnWidths = new int[] {0, 0};
-                ((GridBagLayout)panel2.getLayout()).rowHeights = new int[] {0, 0};
-                ((GridBagLayout)panel2.getLayout()).columnWeights = new double[] {1.0, 1.0E-4};
-                ((GridBagLayout)panel2.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
+                panel2.setLayout(null);
+
+                //======== scrollPane1 ========
+                {
+                    scrollPane1.setViewportView(idList);
+                }
+                panel2.add(scrollPane1);
+                scrollPane1.setBounds(0, 0, 525, 135);
+
+                {
+                    // compute preferred size
+                    Dimension preferredSize = new Dimension();
+                    for(int i = 0; i < panel2.getComponentCount(); i++) {
+                        Rectangle bounds = panel2.getComponent(i).getBounds();
+                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                    }
+                    Insets insets = panel2.getInsets();
+                    preferredSize.width += insets.right;
+                    preferredSize.height += insets.bottom;
+                    panel2.setMinimumSize(preferredSize);
+                    panel2.setPreferredSize(preferredSize);
+                }
             }
             panel1.add(panel2);
             panel2.setBounds(40, 260, 525, 135);
@@ -238,5 +250,12 @@ public class BookDetailFrame extends JFrame {
     private JTextArea textArea9;
     private JButton borrowBook;
     private JPanel panel2;
+    private JScrollPane scrollPane1;
+    private JList idList;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+
+    public static void main(String[] args){
+        new BookDetailFrame(null,null);
+    }
 }
