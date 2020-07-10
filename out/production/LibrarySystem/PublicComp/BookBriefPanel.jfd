@@ -1,0 +1,48 @@
+JFDML JFormDesigner: "7.0.1.0.272" Java: "1.8.0_212-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"background": new java.awt.Color( 255, 255, 255, 255 )
+			"opaque": false
+			"preferredSize": new java.awt.Dimension( 110, 210 )
+			"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "bookCover"
+				"background": new java.awt.Color( 255, 255, 255, 255 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 100
+				"height": 140
+				"x": 15
+				"y": 10
+			} )
+			add( new FormComponent( "javax.swing.JTextArea" ) {
+				name: "bookName"
+				"focusable": false
+				"opaque": false
+				"font": new java.awt.Font( "微软雅黑", 1, 16 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 5
+				"y": 150
+				"width": 120
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JTextArea" ) {
+				name: "bookAuthor"
+				"focusable": false
+				"opaque": false
+				"font": new java.awt.Font( "微软雅黑", 0, 14 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 120
+				"height": 30
+				"x": 5
+				"y": 180
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 415, 255 )
+			"size": new java.awt.Dimension( 130, 210 )
+		} )
+	}
+}

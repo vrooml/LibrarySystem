@@ -1,0 +1,72 @@
+JFDML JFormDesigner: "7.0.1.0.272" Java: "1.8.0_212-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"opaque": false
+			"background": new java.awt.Color( 255, 255, 255, 255 )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+				"toolTipText": "书名/作者/ISBN"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 510
+				"height": 25
+				"x": 215
+				"y": 35
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/Source/search.png" )
+				"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
+				"borderPainted": false
+				"opaque": false
+				"background": new java.awt.Color( 255, 255, 255, 255 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 740
+				"y": 35
+				"width": 25
+				"height": 25
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				"horizontalScrollBarPolicy": 31
+				"verticalScrollBarPolicy": 22
+				"background": new java.awt.Color( 255, 255, 255, 255 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0:1.0, 0:1.0, 0:1.0, 0:1.0, 0:1.0, 0:1.0, 0:1.0, 0:1.0"
+					"$rowSpecs": "0:1.0"
+					"$alignTop": true
+					"$alignLeft": true
+				} ) {
+					name: "panel1"
+					"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
+					"background": new java.awt.Color( 255, 255, 255, 255 )
+					"opaque": false
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 15
+				"y": 70
+				"width": 910
+				"height": 390
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "addBookButton"
+				"text": "添加图书"
+				"font": new java.awt.Font( "微软雅黑", 0, 14 )
+				"background": new java.awt.Color( 89, 143, 209, 255 )
+				"foreground": sfield java.awt.Color white
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 115
+				"height": 30
+				"x": 810
+				"y": 30
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 30, 60 )
+			"size": new java.awt.Dimension( 940, 470 )
+		} )
+	}
+}
