@@ -17,6 +17,15 @@ public class Reader{
         this.address=address;
     }
 
+    public Reader(Reader r){
+        this.readerId=r.getReaderId();
+        this.name=r.getName();
+        this.password=r.getPassword();
+        this.phoneNumber=r.getPhoneNumber();
+        this.limits=r.getLimits();
+        this.address=r.getAddress();
+    }
+
     public int getReaderId(){
         return readerId;
     }

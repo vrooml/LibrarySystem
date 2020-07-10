@@ -5,7 +5,6 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "this"
-			"visible": true
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panel1"
 				"background": new java.awt.Color( 255, 255, 255, 255 )
@@ -13,89 +12,25 @@ new FormModel {
 					name: "cover"
 					"background": sfield java.awt.Color white
 					"opaque": true
+					"text": "上传封面"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 45
-					"y": 15
-					"width": 150
-					"height": 215
-				} )
-				add( new FormComponent( "javax.swing.JTextArea" ) {
-					name: "title"
-					"focusable": false
-					"opaque": false
-					"editable": false
-					"font": new java.awt.Font( "微软雅黑", 0, 20 )
-					"text": "书名"
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 100
-					"height": 35
-					"x": 225
-					"y": 15
-				} )
-				add( new FormComponent( "javax.swing.JTextArea" ) {
-					name: "authors"
-					"focusable": false
-					"opaque": false
-					"editable": false
-					"font": &Font0 new java.awt.Font( "微软雅黑", 0, 16 )
-					"text": "未知"
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 250
-					"height": 25
-					"x": 310
-					"y": 80
-				} )
-				add( new FormComponent( "javax.swing.JTextArea" ) {
-					name: "publisher"
-					"focusable": false
-					"opaque": false
-					"editable": false
-					"font": #Font0
-					"text": "未知"
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 250
-					"height": 25
-					"x": 310
-					"y": 115
-				} )
-				add( new FormComponent( "javax.swing.JTextArea" ) {
-					name: "publishTime"
-					"focusable": false
-					"opaque": false
-					"editable": false
-					"font": #Font0
-					"text": "未知"
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 250
-					"height": 25
-					"x": 310
-					"y": 150
-				} )
-				add( new FormComponent( "javax.swing.JTextArea" ) {
-					name: "ISBN"
-					"focusable": false
-					"opaque": false
-					"editable": false
-					"font": #Font0
-					"text": "未知"
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 250
-					"height": 25
-					"x": 310
-					"y": 185
+					"x": 35
+					"y": 75
+					"width": 165
+					"height": 230
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "textArea6"
 					"focusable": false
 					"opaque": false
 					"editable": false
-					"font": #Font0
+					"font": &Font0 new java.awt.Font( "微软雅黑", 0, 16 )
 					"text": "作者："
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 60
 					"height": 25
-					"x": 230
-					"y": 80
+					"x": 220
+					"y": 130
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "textArea7"
@@ -107,8 +42,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 60
 					"height": 25
-					"x": 230
-					"y": 115
+					"x": 220
+					"y": 170
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "textArea8"
@@ -120,8 +55,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 80
 					"height": 25
-					"x": 230
-					"y": 150
+					"x": 220
+					"y": 210
 				} )
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "textArea9"
@@ -133,12 +68,74 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 80
 					"height": 25
-					"x": 230
-					"y": 185
+					"x": 220
+					"y": 250
+				} )
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea10"
+					"focusable": false
+					"opaque": false
+					"editable": false
+					"font": #Font0
+					"text": "添加数量："
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 80
+					"height": 25
+					"x": 220
+					"y": 290
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "author"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 305
+					"y": 130
+					"width": 220
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "title"
+					"font": new java.awt.Font( "微软雅黑", 0, 20 )
+					"text": "书名"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 40
+					"x": 220
+					"y": 65
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "publisher"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 24
+					"x": 305
+					"y": 170
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "publishTIme"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 24
+					"x": 305
+					"y": 210
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "ISBN"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 24
+					"x": 305
+					"y": 250
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "bookNumber"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 24
+					"x": 305
+					"y": 290
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "borrowBook"
-					"text": "借书"
+					name: "addBookButton"
+					"text": "添加图书"
 					"font": new java.awt.Font( "微软雅黑", 0, 14 )
 					"background": new java.awt.Color( 89, 143, 209, 255 )
 					"foreground": sfield java.awt.Color white
@@ -147,26 +144,7 @@ new FormModel {
 					"width": 305
 					"height": 30
 					"x": 150
-					"y": 410
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-					name: "panel2"
-					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-						name: "scrollPane1"
-						add( new FormComponent( "javax.swing.JList" ) {
-							name: "idList"
-						} )
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 0
-						"y": 0
-						"width": 525
-						"height": 135
-					} )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 525
-					"height": 135
-					"x": 40
-					"y": 260
+					"y": 360
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
