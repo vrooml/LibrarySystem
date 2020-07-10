@@ -7,12 +7,9 @@ package Admin;
 import Admin.BookItemPanel;
 import Beans.Book;
 import Beans.Record;
-import Utils.DBConnect;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +17,6 @@ import java.util.ArrayList;
  */
 public class AddBookFrame extends JFrame{
     Book book;
-    int _bookNumber;
 
 
     public AddBookFrame(){
@@ -29,98 +25,7 @@ public class AddBookFrame extends JFrame{
     }
 
     private void init(){
-        //DBConnect db = new DBConnect();//连接数据库
-        int isAddOK;//记录是否成功添加新书
-        JFrame jf = new JFrame("添加新书");
-        jf.setSize(610,460);
-        jf.setLocationRelativeTo(null);
-        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        //给添加新书的按钮添加监听器，按下之后会检验输入的各个数据的合法性，如果全都合法的话就用得到的数据建一个book实例并调用数据库添加新书的函数。
-        addBookButton.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                if(title.getText().equals(null)||title.getText().equals(""))
-                {
-                    JOptionPane.showMessageDialog(null,"添加失败，图书名字不能为空！");
-                    return;
-                }
-                else if(author.getText().equals(null)||author.getText().equals(""))
-                {
-                    JOptionPane.showMessageDialog(null,"添加失败，作者名字不能为空！");
-                    return;
-                }
-                else if(ISBN.getText().equals(null)||ISBN.getText().equals(""))
-                {
-                    JOptionPane.showMessageDialog(null,"添加失败，ISBN编号不能为空！");
-                    return;
-                }
-                else if(publishTIme.getText().equals(null)||publishTIme.getText().equals(""))
-                {
-                    JOptionPane.showMessageDialog(null,"添加失败，出版日期不能为空！");
-                    return;
-                }
-                else if(publisher.getText().equals(null)||publisher.getText().equals(""))
-                {
-                    JOptionPane.showMessageDialog(null,"添加失败，出版社名称不能为空！");
-                    return;
-                }
-                else if(bookNumber.getText().equals(null)||bookNumber.getText().equals(""))
-                {
-                    JOptionPane.showMessageDialog(null,"添加失败，添加数量不能为空！");
-                    return;
-                }
-                else if(bookNumber.getText().charAt(0) == '0')
-                {
-                    JOptionPane.showMessageDialog(null,"添加失败，输入了非法的图书数量，只能输入大于0的数字，且数字不能以0为开头！");
-                    return;
-                }
-                else if(!isAllDigit(bookNumber.getText()))
-                {
-                    JOptionPane.showMessageDialog(null,"添加失败，输入了非法的图书数量，只能输入大于0的数字，且数字不能以0为开头！");
-                    return;
-                }
-                else //上述情况都没有出现，数据可用，调用函数上传至数据库
-                {
-                    _bookNumber=Integer.valueOf(bookNumber.getText());//将文本框内的添加数量转化成数字
-                    /*Book newbook=new Book(ISBN.getText(),title.getText(),author.getText(),publisher.getText(),publishTIme.getText(),);
-                    isAddOK=db.addNewBook(newbook,_booknumber);
-                    if(!isAddOK)//添加成功
-                    {
-                        JOptionPane.showMessageDialog(null,message:"添加图书成功！");
-                        return;
-                    }
-                    else if(isAddOK==1)
-                    {
-                    JOptionPane.showMessageDialog(null,message:"操作异常，添加图书失败！");
-                    return;
-                    }
-                    else
-                    {
-                    JOptionPane.showMessageDialog(null,message:"系统出错,添加图书失败！");
-                    return;
-                    }
-                     */
-                }
-            }
-        });
-
-        jf.setContentPane(panel1);
-        jf.setVisible(true);
-
-
-    }
-
-    boolean isAllDigit(String str) //判断字符串是否全部为数字的函数
-    {
-        for (int i = 0; i < str.length(); i++) {
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private void initComponents(){
