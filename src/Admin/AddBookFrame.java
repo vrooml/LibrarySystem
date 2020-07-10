@@ -7,16 +7,28 @@ package Admin;
 import Admin.BookItemPanel;
 import Beans.Book;
 import Beans.Record;
+import Utils.DBConnect;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 
 /**
  * @author Yang
  */
 public class AddBookFrame extends JFrame{
     Book book;
+    int _bookNumber;
+    ImageIcon image;
+    int isAddOk = 0;//记录是否成功添加新书
 
 
     public AddBookFrame(){
@@ -25,7 +37,123 @@ public class AddBookFrame extends JFrame{
     }
 
     private void init(){
+        _bookNumber=0;
+        try {
+            DBConnect db = new DBConnect();//连接数据库
+            JFrame jf = new JFrame("添加新书");
+            jf.setSize(610, 460);
+            jf.setLocationRelativeTo(null);
+            jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+            JTextArea jta = new JTextArea();
+            jta.setFocusable(false);
+            jta.setOpaque(false);
+            jta.setEditable(false);
+            jta.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+            jta.setText("\u4e66\u540d\uff1a");
+            panel1.add(jta);
+            jta.setBounds(220, 90, 60, 25);
+
+            JTextField coverAddress = new JTextField("此处输入图片路径:");
+            coverAddress.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 12));
+            panel1.add(coverAddress);
+            coverAddress.setBounds(20, 280, 140, 30);
+
+            JButton addCover = new JButton("上传封面");//添加封面的按钮
+            panel1.add(addCover);
+            addCover.setBounds(40, 350, 100, 30);
+
+            addCover.addActionListener(new ActionListener() {    //给添加封面按钮添加监听器,用于添加封面
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (coverAddress.getText() == null || coverAddress.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "封面不能为空！");
+                        return;
+                    }
+                    image = new ImageIcon(coverAddress.getText());
+                    image.setImage(image.getImage().getScaledInstance(165, 230, Image.SCALE_DEFAULT));
+                    cover.setIcon(image);
+                }
+            });
+
+            //给添加新书的按钮添加监听器，按下之后会检验输入的各个数据的合法性，如果全都合法的话就用得到的数据建一个book实例并调用数据库添加新书的函数。
+            addBookButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (title.getText().equals(null) || title.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "添加失败，图书名字不能为空！");
+                        return;
+                    } else if (author.getText().equals(null) || author.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "添加失败，作者名字不能为空！");
+                        return;
+                    } else if (ISBN.getText().equals(null) || ISBN.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "添加失败，ISBN编号不能为空！");
+                        return;
+                    } else if (publishTIme.getText().equals(null) || publishTIme.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "添加失败，出版日期不能为空！");
+                        return;
+                    } else if (publisher.getText().equals(null) || publisher.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "添加失败，出版社名称不能为空！");
+                        return;
+                    } else if (bookNumber.getText().equals(null) || bookNumber.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "添加失败，添加数量不能为空！");
+                        return;
+                    } else if (coverAddress.getText().equals(null) || coverAddress.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "添加失败，图书封面的图片路径不能为空！");
+                        return;
+                    } else if (bookNumber.getText().charAt(0) == '0') {
+                        JOptionPane.showMessageDialog(null, "添加失败，输入了非法的图书数量，只能输入大于0的数字，且数字不能以0为开头！");
+                        return;
+                    } else if (!isAllDigit(bookNumber.getText())) {
+                        JOptionPane.showMessageDialog(null, "添加失败，输入了非法的图书数量，只能输入大于0的数字，且数字不能以0为开头！");
+                        return;
+                    }
+                      else if (coverAddress.getText().equals("此处输入图片路径:") )
+                    {
+                        JOptionPane.showMessageDialog(null,"添加失败，您还没有上传封面呢");
+                        return;
+                    }
+                    else //上述情况都没有出现，数据可用，调用函数上传至数据库
+                    {
+                        _bookNumber = Integer.valueOf(bookNumber.getText());//将文本框内的添加数量转化成数字
+                        Book newbook = new Book(ISBN.getText(), title.getText(), author.getText(), publisher.getText(), publishTIme.getText(), image);
+                        isAddOk = db.addNewBook(newbook, _bookNumber);
+                        if (isAddOk == 0)//添加成功
+                        {
+                            JOptionPane.showMessageDialog(null, "添加图书成功！");
+                            return;
+                        } else if (isAddOk == 1) {
+                            JOptionPane.showMessageDialog(null, "操作异常，添加图书失败！");
+                            return;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "系统出错,添加图书失败！");
+                            return;
+                        }
+                    }
+                }
+            });
+
+            jf.setContentPane(panel1);
+            jf.setVisible(true);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            ex.printStackTrace();
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    boolean isAllDigit(String str) //判断字符串是否全部为数字的函数
+    {
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void initComponents(){
@@ -66,7 +194,7 @@ public class AddBookFrame extends JFrame{
             cover.setOpaque(true);
             cover.setText("\u4e0a\u4f20\u5c01\u9762");
             panel1.add(cover);
-            cover.setBounds(35, 75, 165, 230);
+            cover.setBounds(35, 30, 165, 230);
 
             //---- textArea6 ----
             textArea6.setFocusable(false);
@@ -116,10 +244,9 @@ public class AddBookFrame extends JFrame{
             author.setBounds(305, 130, 220, author.getPreferredSize().height);
 
             //---- title ----
-            title.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 20));
-            title.setText("\u4e66\u540d");
+            title.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
             panel1.add(title);
-            title.setBounds(220, 65, 220, 40);
+            title.setBounds(305, 90, 220, 24);
             panel1.add(publisher);
             publisher.setBounds(305, 170, 220, 24);
             panel1.add(publishTIme);
