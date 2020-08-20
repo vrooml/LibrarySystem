@@ -39,21 +39,15 @@ public class ReaderInfoPanel extends JPanel{
                 Reader newReader=new Reader(reader);
                 newReader.setAddress(addressField.getText());
                 newReader.setPhoneNumber(phoneField.getText());
-                try {
-                    DBConnect db = new DBConnect();
-                    int condition=db.modifyReaderInformation(newReader);
-                    System.out.println(condition);
-                    if(condition==0){
-                        JOptionPane.showMessageDialog(this,"修改成功");
-                    }else if(condition==1){
-                        JOptionPane.showMessageDialog(this,"传入信息有误");
-                    }else{
-                        JOptionPane.showMessageDialog(this,"系统异常","错误",JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+                DBConnect db = new DBConnect();
+                int condition=db.modifyReaderInformation(newReader);
+                System.out.println(condition);
+                if(condition==0){
+                    JOptionPane.showMessageDialog(this,"修改成功");
+                }else if(condition==1){
+                    JOptionPane.showMessageDialog(this,"传入信息有误");
+                }else{
+                    JOptionPane.showMessageDialog(this,"系统异常","错误",JOptionPane.ERROR_MESSAGE);
                 }
                 setReaderInformation();
             }
@@ -63,21 +57,15 @@ public class ReaderInfoPanel extends JPanel{
     //通过readerId获取读者信息，并显示
     private void setReaderInformation(){
         //用readerId获取读者信息并显示
-        try {
-            DBConnect db = new DBConnect();
-            reader=new Reader(db.queryReaderInformation(readerId));
-            nameArea.setText(reader.getName());
-            addressField.setText(reader.getAddress());
-            phoneField.setText(reader.getPhoneNumber());
-            limitsDisplayArea.setText(String.valueOf(reader.getLimits()));
-            alterButton.setText("修改信息");
-            addressField.setEditable(false);
-            phoneField.setEditable(false);
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+        DBConnect db = new DBConnect();
+        reader=new Reader(db.queryReaderInformation(readerId));
+        nameArea.setText(reader.getName());
+        addressField.setText(reader.getAddress());
+        phoneField.setText(reader.getPhoneNumber());
+        limitsDisplayArea.setText(String.valueOf(reader.getLimits()));
+        alterButton.setText("修改信息");
+        addressField.setEditable(false);
+        phoneField.setEditable(false);
     }
 
 

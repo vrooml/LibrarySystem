@@ -15,6 +15,7 @@ import Reader.BookDetailFrame;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import javax.swing.*;
 
 /**
@@ -39,9 +40,17 @@ public class BookBriefPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e){
                 if(source==1){
-                    new AdminBookDetailFrame(book);
+                    try{
+                        new AdminBookDetailFrame(book);
+                    }catch(SQLException|ClassNotFoundException throwables){
+                        throwables.printStackTrace();
+                    }
                 }else{
-                    new BookDetailFrame(book,reader);
+                    try{
+                        new BookDetailFrame(book.getISBN(),String.valueOf(reader.getReaderId()));
+                    }catch(SQLException|ClassNotFoundException throwables){
+                        throwables.printStackTrace();
+                    }
                 }
             }
             @Override
