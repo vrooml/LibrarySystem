@@ -33,15 +33,10 @@ public class RegisterFrame extends JFrame{
             registerMes.put("readerPassword",SHA1Encryption.getSHA1(textField2.getText()));  //密码加密
             registerMes.put("address",textField3.getText());
             registerMes.put("phoneNumber",textField4.getText());
-            try {
-                DBConnect db = new DBConnect();
-                id = db.readerRegist(registerMes);
-                JOptionPane.showMessageDialog(null,"你的账号为：" + id + "\n务必牢记！！！","注册成功",JOptionPane.INFORMATION_MESSAGE);
-            } catch (ClassNotFoundException ex) {
-                ex.printStackTrace();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+            DBConnect db = new DBConnect();
+            id = db.readerRegist(registerMes);
+            JOptionPane.showMessageDialog(null,"你的账号为：" + id + "\n务必牢记！！！","注册成功",JOptionPane.INFORMATION_MESSAGE);
+
         });
 
     }

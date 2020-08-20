@@ -25,17 +25,6 @@ public class DBConnect {
     static final public Integer BORROW_BOOK_NUM_LIMITS = new Integer(5);   //常量，借书最大数
 
 
-    public DBConnect() throws ClassNotFoundException, SQLException {   //构造函数
-//        try {
-////            Class.forName("com.mysql.cj.jdbc.Driver");
-////            connection = DriverManager.getConnection(DATABASE_URL, "root", "password");
-//            statement = connection.createStatement();
-//        }
-//        catch (SQLException sqlException ) {
-//            sqlException.printStackTrace();
-//        } // end catch
-    }
-
 
     private void connect() throws SQLException{
         connection=DriverManager.getConnection(DATABASE_URL,"root","password");
@@ -63,6 +52,7 @@ public class DBConnect {
         }
         finally {
             try{
+                statement.close();
                 connection.close();
             }
             catch (Exception e){
@@ -92,6 +82,7 @@ public class DBConnect {
         }
         finally {
             try{
+                statement.close();
                 connection.close();
             }
             catch (Exception e){
@@ -132,6 +123,7 @@ public class DBConnect {
         }
         finally {
             try{
+                statement.close();
                 connection.close();
             }
             catch (Exception e){
@@ -172,6 +164,7 @@ public class DBConnect {
         }
         finally {
             try{
+                statement.close();
                 connection.close();
             }
             catch (Exception e){
@@ -235,6 +228,7 @@ public class DBConnect {
         }
         finally {
             try{
+                statement.close();
                 connection.setAutoCommit(true);  //重新开启connection自动提交
                 connection.close();
             }
@@ -291,6 +285,7 @@ public class DBConnect {
         }
         finally {
             try{
+                statement.close();
                 connection.close();
             }
             catch (Exception exc){
@@ -400,6 +395,7 @@ public class DBConnect {
                 //标记为已被借阅
                 preparedStatement=connection.prepareStatement(
                         "update bookid set bookid.isBorrowed=1 where bookid.bookId=? and isBorrowed=0;"
+
                 );
                 preparedStatement.setObject(1,record.getBookId());
                 if(preparedStatement.executeUpdate()==0){
@@ -706,14 +702,14 @@ public class DBConnect {
         查询已借阅图书记录接口
         输入参数：String 为图书的isbn
         输出参数：Vector<Record>
-                向量元素Record中仅包含bookId和readerId，其他变量无意义
+                向量元素Record中仅包含bookId和readerId，borrowingDate,returnDate其他变量无意义
          */
     public Vector<Record> queryBorrowedBookRecord(String isbn){
         Vector<Record> recordVector=new Vector<>();
         try {
             connect();
             PreparedStatement statement=connection.prepareStatement(
-                    "select record.bookId,record.readerId " +
+                    "select record.bookId,record.readerId,record.borrowingDate,record.returnDate " +
                             "from record,bookid " +
                             "where bookid.isbn=? " +
                             "and record.bookId=bookid.bookId;"
@@ -726,9 +722,8 @@ public class DBConnect {
                         resultSet.getInt(1),
                         resultSet.getInt(2),
                         null,
-                        null,
-                        null
-
+                        resultSet.getString(3),
+                        resultSet.getString(4)
                 ));
             }
             resultSet.close();
@@ -819,14 +814,68 @@ public class DBConnect {
         return result;
     }
 
+
+    /*
+        查找某本书的详细信息
+        输入参数：String 为 带查找书籍ISBN
+        输出参数：Book
+         */
+
+    public Book getDetailedBookInf(String ISBN) {
+        Book book = null;
+        try {
+            connect();
+            //删除登录信息相应reader，record记录也删除
+            PreparedStatement statement = connection.prepareStatement(
+                    "select ISBN,title,authors,publisher,publicationDate,cover from bookinformation where ISBN=?"
+            );
+            statement.setObject(1, ISBN);
+            ResultSet result =statement.executeQuery();
+            while (result.next()){
+                //Book(String ISBN,String title,String authors,String publisher,String publishDate,ImageIcon cover)
+                //封面解码
+                Base64.Decoder decoder = Base64.getDecoder();
+                byte[] imageBytes = decoder.decode(result.getObject(6).toString());  //base64解码
+                ImageIcon icon = new ImageIcon((imageBytes));
+                icon.setImage(icon.getImage());
+
+                book = new Book(result.getString(1),
+                                result.getString(2),
+                                result.getString(3),
+                                result.getString(4),
+                                result.getString(5),
+                                icon);
+            }
+            statement.close();
+        } catch (SQLException throwables0) {
+            throwables0.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException throwables1) {
+                throwables1.printStackTrace();
+            }
+        }
+        return book;
+    }
+
+
+
+
+
+
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DBConnect db=new DBConnect();
 //        Scanner scanner=new Scanner(System.in);
 //        System.out.println(db.borrowBook(new Record(0,100012,6,null,
 //                "2000-2-1","2001-2-1")));
+        //System.out.print(db.borrowBook(new Record(0,100052,8,null,"2020-7-10","2020-10-10")));
+
 //        System.out.println(db.borrowBook(new Record(0,100030,7,null,
 //                "2020-1-1","2021-1-1")));
         System.out.println(db.deleteReader(9));
+
     }
 
 

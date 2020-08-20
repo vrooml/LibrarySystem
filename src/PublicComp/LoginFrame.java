@@ -36,42 +36,33 @@ public class LoginFrame extends JFrame{
 
         login.addActionListener(e->{
             //登录逻辑
-            try {
-                String id = accountField.getText();
-                String password = String.valueOf(passwordField1.getPassword());
-                System.out.print(password);
-                password = SHA1Encryption.getSHA1(password);  //密码加密
-                int loginStatue;  //记录登录状态
-                DBConnect db = new DBConnect();
-                if(readerButton.isSelected()){    //读者登录
-                    loginStatue = db.readerLogin(id, password); //调用数据库读者登陆接口
-                    if(loginStatue == 0) {  //登陆成功
-                        new ReaderFrame(id);
-                        this.setVisible(false);  //登陆成功，隐藏当前窜口
-                    }
 
-                }
-                else {     //管理员登录
-                    loginStatue = db.adminLogin(id, password); //调用数据库管理员登陆接口
-                    if(loginStatue == 0) {
-                        //new AdminFrame();
-                        this.setVisible(false);  //登陆成功，隐藏当前窜口
-                    }
+            String id = accountField.getText();
+            String password = String.valueOf(passwordField1.getPassword());
+            System.out.print(password);
+            password = SHA1Encryption.getSHA1(password);  //密码加密
+            int loginStatue;  //记录登录状态
+            DBConnect db = new DBConnect();
+            if(readerButton.isSelected()){    //读者登录
+                loginStatue = db.readerLogin(id, password); //调用数据库读者登陆接口
+                if(loginStatue == 0) {  //登陆成功
+                    new ReaderFrame(id);
+                    this.setVisible(false);  //登陆成功，隐藏当前窜口
                 }
 
-                if(loginStatue == 1)  //账号不存在
-                    JOptionPane.showMessageDialog(null,"账号不存在","Error",JOptionPane.ERROR_MESSAGE);
-                else if(loginStatue == 2) //账号密码不匹配
-                    JOptionPane.showMessageDialog(null,"账号与密码不匹配","Error",JOptionPane.ERROR_MESSAGE);
-
-
-            } catch (ClassNotFoundException ex) {
-                ex.printStackTrace();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            }
+            else {     //管理员登录
+                loginStatue = db.adminLogin(id, password); //调用数据库管理员登陆接口
+                if(loginStatue == 0) {
+                    //new AdminFrame();
+                    this.setVisible(false);  //登陆成功，隐藏当前窜口
+                }
             }
 
-
+            if(loginStatue == 1)  //账号不存在
+                JOptionPane.showMessageDialog(null,"账号不存在","Error",JOptionPane.ERROR_MESSAGE);
+            else if(loginStatue == 2) //账号密码不匹配
+                JOptionPane.showMessageDialog(null,"账号与密码不匹配","Error",JOptionPane.ERROR_MESSAGE);
 //            new ReaderFrame(db);
 //            or
 //            new AdminFrame(db);
