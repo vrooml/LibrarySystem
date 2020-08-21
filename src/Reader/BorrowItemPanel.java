@@ -17,7 +17,7 @@ import javax.swing.border.*;
 public class BorrowItemPanel extends JPanel {
     Record record;
     DBConnect db;
-    public BorrowItemPanel(Record record) {
+    public BorrowItemPanel(Record record,BorrowInfoPanel parentPanel) {
         this.record=record;
         initComponents();
         bookName.setText(record.getBookName());
@@ -26,12 +26,22 @@ public class BorrowItemPanel extends JPanel {
 
         returnBook.addActionListener(e->{
             //还书逻辑
+            DBConnect db=new DBConnect();
+            int result=db.returnBook(record);
+            if(result==0){
+                JOptionPane.showMessageDialog(this,"还书成功");
+                parentPanel.update();
+            }else if(result==1){
+                JOptionPane.showMessageDialog(this,"传入信息有误或数据库信息异常");
+            }else{
+                JOptionPane.showMessageDialog(this,"系统出错");
+            }
         });
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Yang
+        // Generated using JFormDesigner Evaluation license - unknown
         bookName = new JTextArea();
         returnBook = new JButton();
         borrowTime = new JTextArea();
@@ -40,12 +50,6 @@ public class BorrowItemPanel extends JPanel {
         //======== this ========
         setBackground(Color.white);
         setBorder(null);
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-        . EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax
-        . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,
-        12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans
-        . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .
-        getPropertyName () )) throw new RuntimeException( ); }} );
         setLayout(null);
 
         //---- bookName ----
@@ -102,7 +106,7 @@ public class BorrowItemPanel extends JPanel {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Yang
+    // Generated using JFormDesigner Evaluation license - unknown
     private JTextArea bookName;
     private JButton returnBook;
     private JTextArea borrowTime;

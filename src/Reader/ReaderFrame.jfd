@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.1.0.272" Java: "1.8.0_212-release" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.2.4.305" Java: "11.0.7" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -9,35 +9,21 @@ new FormModel {
 			"resizable": false
 			add( new FormComponent( "javax.swing.JTextArea" ) {
 				name: "textArea1"
-				"text": "欢迎，"
+				"text": "欢迎使用图书管理系统"
 				"focusable": false
 				"opaque": false
 				"editable": false
-				"font": &Font0 new java.awt.Font( "微软雅黑", 0, 26 )
+				"font": new java.awt.Font( "微软雅黑", 0, 26 )
 				"foreground": sfield java.awt.Color white
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 70
+				"width": 300
 				"x": 20
-				"y": 25
-			} )
-			add( new FormComponent( "javax.swing.JTextArea" ) {
-				name: "userNameField"
-				"focusable": false
-				"opaque": false
-				"editable": false
-				"font": #Font0
-				"foreground": sfield java.awt.Color white
-				"text": "用户名"
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 320
-				"height": 35
-				"x": 90
 				"y": 25
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "searchBookButton"
 				"text": "图书检索"
-				"font": &Font1 new java.awt.Font( "微软雅黑", 0, 14 )
+				"font": &Font0 new java.awt.Font( "微软雅黑", 0, 14 )
 				"background": &Color0 new java.awt.Color( 89, 143, 209, 255 )
 				"foreground": sfield java.awt.Color white
 				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
@@ -50,7 +36,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "readerInfoButton"
 				"text": "读者信息"
-				"font": #Font1
+				"font": #Font0
 				"background": #Color0
 				"foreground": sfield java.awt.Color white
 				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
@@ -63,7 +49,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "borrowInfoButton"
 				"text": "借阅信息"
-				"font": #Font1
+				"font": #Font0
 				"background": #Color0
 				"foreground": sfield java.awt.Color white
 				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE

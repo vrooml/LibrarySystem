@@ -21,13 +21,14 @@ import javax.swing.*;
 /**
  * @author Yang
  */
-public class BookBriefPanel extends JPanel {
+public class BookBriefPanel extends JPanel{
     Book bookInfo;
-    Reader reader;
+    String readerId;
     int source;
-    public BookBriefPanel(Book book,Reader reader,int source) {
+
+    public BookBriefPanel(Book book,String readerId,int source){
         this.bookInfo=book;
-        this.reader=reader;
+        this.readerId=readerId;
         this.source=source;
         initComponents();
         if(bookInfo.getCover()!=null){
@@ -47,24 +48,28 @@ public class BookBriefPanel extends JPanel {
                     }
                 }else{
                     try{
-                        new BookDetailFrame(book.getISBN(),String.valueOf(reader.getReaderId()));
+                        new BookDetailFrame(book.getISBN(),readerId);
                     }catch(SQLException|ClassNotFoundException throwables){
                         throwables.printStackTrace();
                     }
                 }
             }
+
             @Override
             public void mousePressed(MouseEvent e){
 
             }
+
             @Override
             public void mouseReleased(MouseEvent e){
 
             }
+
             @Override
             public void mouseEntered(MouseEvent e){
 
             }
+
             @Override
             public void mouseExited(MouseEvent e){
 
@@ -72,9 +77,9 @@ public class BookBriefPanel extends JPanel {
         });
     }
 
-    private void initComponents() {
+    private void initComponents(){
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Yang
+        // Generated using JFormDesigner Evaluation license - unknown
         bookCover = new JLabel();
         bookName = new JTextArea();
         bookAuthor = new JTextArea();
@@ -84,6 +89,13 @@ public class BookBriefPanel extends JPanel {
         setOpaque(false);
         setPreferredSize(new Dimension(110, 210));
         setBorder(null);
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+        . border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder
+        . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
+        awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder( )) )
+        ;  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+        ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+        ;
         setLayout(null);
 
         //---- bookCover ----
@@ -94,16 +106,16 @@ public class BookBriefPanel extends JPanel {
         //---- bookName ----
         bookName.setFocusable(false);
         bookName.setOpaque(false);
-        bookName.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.BOLD, 16));
+        bookName.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.BOLD, 12));
         add(bookName);
-        bookName.setBounds(5, 150, 120, 30);
+        bookName.setBounds(15, 150, 100, 30);
 
         //---- bookAuthor ----
         bookAuthor.setFocusable(false);
         bookAuthor.setOpaque(false);
-        bookAuthor.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
+        bookAuthor.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 10));
         add(bookAuthor);
-        bookAuthor.setBounds(5, 180, 120, 30);
+        bookAuthor.setBounds(15, 180, 100, 30);
 
         {
             // compute preferred size
@@ -123,7 +135,7 @@ public class BookBriefPanel extends JPanel {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Yang
+    // Generated using JFormDesigner Evaluation license - unknown
     private JLabel bookCover;
     private JTextArea bookName;
     private JTextArea bookAuthor;

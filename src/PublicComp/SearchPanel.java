@@ -5,9 +5,14 @@ package PublicComp;/*
 import Admin.AddBookFrame;
 import Beans.Book;
 import Beans.Reader;
+import Utils.DBConnect;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -18,7 +23,7 @@ public class SearchPanel extends JPanel{
     int source;//表明是从admin打开的还是reader打开的，这样里面点击书本打开界面才会不同
     //1为admin 2为reader
 
-    Reader reader=null;
+    String readerId;
     ArrayList<Book> books;
 
     public SearchPanel(int source){
@@ -27,8 +32,8 @@ public class SearchPanel extends JPanel{
         init();
     }
 
-    public SearchPanel(int source,Reader reader){
-        this.reader=reader;
+    public SearchPanel(int source,String readerId){
+        this.readerId=readerId;
         this.source=source;
         initComponents();
         init();
@@ -46,54 +51,72 @@ public class SearchPanel extends JPanel{
         }
 
         GridBagLayout gridBag=(GridBagLayout)panel1.getLayout();    // 布局管理器
-        GridBagConstraints c=null;
+        final GridBagConstraints[] c={null};
         books=new ArrayList<>();
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
-        books.add(new Book("1234","测试","作者",null));
+
+        //请求book
+        DBConnect db=new DBConnect();
+        Vector<Map<String,Object>> result=db.selectBooksInf("");
+        for(int i=0;i<result.size();i++){
+            Book book=new Book((String)result.get(i).get("ISBN"),
+                    (String)result.get(i).get("title"),
+                    (String)result.get(i).get("authors"),
+                    (ImageIcon)result.get(i).get("cover"));
+            books.add(book);
+        }
 
         //装载book到ui
         for(int i=0;i<books.size();i++){
-            c=new GridBagConstraints();
-            if((i+1)%8==0){
-                c.gridwidth=GridBagConstraints.REMAINDER;
-                c.fill=GridBagConstraints.BOTH;
+            c[0]=new GridBagConstraints();
+            if((i+1)%7==0){
+                c[0].gridwidth=GridBagConstraints.REMAINDER;
+                c[0].fill=GridBagConstraints.BOTH;
             }
-            BookBriefPanel briefPanel=new BookBriefPanel(books.get(i),reader,source);
-            gridBag.addLayoutComponent(briefPanel,c);
+            BookBriefPanel briefPanel=new BookBriefPanel(books.get(i),readerId,source);
+            gridBag.addLayoutComponent(briefPanel,c[0]);
             panel1.add(briefPanel);
 
         }
 
 
-        //请求books
 
+//        添加searchButton的监听
+        searchButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                books.clear();
+                Vector<Map<String,Object>> searchResult=db.selectBooksInf(textField1.getText().trim());
+                for(int i=0;i<searchResult.size();i++){
+                    Book book=new Book((String)searchResult.get(i).get("ISBN"),
+                            (String)searchResult.get(i).get("title"),
+                            (String)searchResult.get(i).get("authors"),
+                            (ImageIcon)searchResult.get(i).get("cover"));
+                    books.add(book);
+                }
 
-        //添加searchButton的监听
-//        searchButton.addActionListener(e -> {
-//            try{
-//
-//            }catch(){
-//
-//            }
-//        });
+                for(int i=0;i<books.size();i++){
+                    panel1.removeAll();
+                    c[0]=new GridBagConstraints();
+                    if((i+1)%7==0){
+                        c[0].gridwidth=GridBagConstraints.REMAINDER;
+                        c[0].fill=GridBagConstraints.BOTH;
+                    }
+                    BookBriefPanel briefPanel=new BookBriefPanel(books.get(i),readerId,source);
+                    gridBag.addLayoutComponent(briefPanel,c[0]);
+                    panel1.add(briefPanel);
+
+                }
+
+            }
+        });
     }
 
 
     private void initComponents(){
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Yang
+        // Generated using JFormDesigner Evaluation license - unknown
         textField1 = new JTextField();
-        button1 = new JButton();
+        searchButton = new JButton();
         scrollPane1 = new JScrollPane();
         panel1 = new JPanel();
         addBookButton = new JButton();
@@ -101,12 +124,12 @@ public class SearchPanel extends JPanel{
         //======== this ========
         setOpaque(false);
         setBackground(Color.white);
-        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
-        EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax . swing
-        . border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,
-        java . awt. Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
-        { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )
-        throw new RuntimeException( ) ;} } );
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+        border.EmptyBorder(0,0,0,0), "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e",javax.swing.border.TitledBorder.CENTER
+        ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dialo\u0067",java.awt.Font
+        .BOLD,12),java.awt.Color.red), getBorder())); addPropertyChangeListener(
+        new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("borde\u0072"
+        .equals(e.getPropertyName()))throw new RuntimeException();}});
         setLayout(null);
 
         //---- textField1 ----
@@ -114,14 +137,14 @@ public class SearchPanel extends JPanel{
         add(textField1);
         textField1.setBounds(215, 35, 510, 25);
 
-        //---- button1 ----
-        button1.setIcon(new ImageIcon(getClass().getResource("/Source/search.png")));
-        button1.setBorder(LineBorder.createBlackLineBorder());
-        button1.setBorderPainted(false);
-        button1.setOpaque(false);
-        button1.setBackground(Color.white);
-        add(button1);
-        button1.setBounds(740, 35, 25, 25);
+        //---- searchButton ----
+        searchButton.setIcon(new ImageIcon(getClass().getResource("/Source/search.png")));
+        searchButton.setBorder(LineBorder.createBlackLineBorder());
+        searchButton.setBorderPainted(false);
+        searchButton.setOpaque(false);
+        searchButton.setBackground(Color.white);
+        add(searchButton);
+        searchButton.setBounds(740, 35, 25, 25);
 
         //======== scrollPane1 ========
         {
@@ -172,9 +195,9 @@ public class SearchPanel extends JPanel{
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Yang
+    // Generated using JFormDesigner Evaluation license - unknown
     private JTextField textField1;
-    private JButton button1;
+    private JButton searchButton;
     private JScrollPane scrollPane1;
     private JPanel panel1;
     private JButton addBookButton;

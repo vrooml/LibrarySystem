@@ -18,7 +18,7 @@ import java.util.Vector;
 
 public class DBConnect {
     // database URL
-    static final String DATABASE_URL = "jdbc:mysql://47.101.217.136/librarysystem?useUnicode = true & characterEncoding = utf-8 & useSSL = false & &serverTimezone = GMT";
+    static final String DATABASE_URL = "jdbc:mysql://localhost:3306/librarysystem?useUnicode = true & characterEncoding = utf-8 & useSSL = false & &serverTimezone = GMT";
     static private Connection connection = null; // manages connection
     static private Statement statement = null; // query statement
     static private ResultSet resultSet = null; // manages results
@@ -27,7 +27,7 @@ public class DBConnect {
 
 
     private void connect() throws SQLException{
-        connection=DriverManager.getConnection(DATABASE_URL,"root","password");
+        connection=DriverManager.getConnection(DATABASE_URL,"root","123456");
     }
 
 
@@ -250,7 +250,7 @@ public class DBConnect {
     authors String
     cover ImageIcon
      */
-    Vector<Map<String,Object>> selectBooksInf(String selectRequire){
+    public Vector<Map<String,Object>> selectBooksInf(String selectRequire){
         Vector<Map<String,Object>> booksMes = new Vector<Map<String, Object>>();
         try {
             connect();
@@ -497,7 +497,7 @@ public class DBConnect {
                 其中的向量元素Record仅包含（bookName,bookId,borrowDate,returnDate）
                 其他变量无意义
          */
-    public Vector<Record> queryReaderBorrowingRecord(Reader reader){
+    public Vector<Record> queryReaderBorrowingRecord(String readerId){
         Vector<Record> recordVector=new Vector<>();
         try {
             connect();
@@ -508,7 +508,7 @@ public class DBConnect {
                             "and record.bookId=bookid.bookId " +
                             "and bookid.isbn=bookinformation.isbn;"
             );
-            preparedStatement.setObject(1,reader.getReaderId());
+            preparedStatement.setObject(1,readerId);
             ResultSet resultSet=preparedStatement.executeQuery();
             while (resultSet.next()){
                 recordVector.add(new Record(
@@ -874,7 +874,7 @@ public class DBConnect {
 
 //        System.out.println(db.borrowBook(new Record(0,100030,7,null,
 //                "2020-1-1","2021-1-1")));
-        System.out.println(db.deleteReader(9));
+//        System.out.println(db.deleteReader(9));
 
     }
 
