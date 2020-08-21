@@ -4,6 +4,7 @@
 
 package Reader;
 
+import javax.swing.border.*;
 import Beans.Reader;
 import Beans.Record;
 import Utils.DBConnect;
@@ -51,7 +52,6 @@ public class BorrowInfoPanel extends JPanel{
         panel1.removeAll();
         GridBagLayout gridBag=(GridBagLayout)panel1.getLayout();    // 布局管理器
         GridBagConstraints c=null;
-        //请求还书记录逻辑
         records=new ArrayList<>();
 
         DBConnect db=new DBConnect();
@@ -66,6 +66,7 @@ public class BorrowInfoPanel extends JPanel{
             gridBag.addLayoutComponent(borrowItemPanel,c);
             panel1.add(borrowItemPanel);
         }
+        this.updateUI();
     }
 
     private void initComponents(){
@@ -73,15 +74,19 @@ public class BorrowInfoPanel extends JPanel{
         // Generated using JFormDesigner Evaluation license - unknown
         scrollPane1 = new JScrollPane();
         panel1 = new JPanel();
+        borrowTime = new JTextArea();
+        bookName = new JTextArea();
+        returnTime = new JTextArea();
 
         //======== this ========
         setOpaque(false);
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-        border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER
-        , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font
-        .BOLD ,12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (
-        new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order"
-        .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+        . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
+        . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
+        awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder( )) )
+        ;  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+        ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+        ;
         setLayout(null);
 
         //======== scrollPane1 ========
@@ -102,6 +107,36 @@ public class BorrowInfoPanel extends JPanel{
         }
         add(scrollPane1);
         scrollPane1.setBounds(30, 35, 885, 405);
+
+        //---- borrowTime ----
+        borrowTime.setText("\u501f\u4e66\u65f6\u95f4");
+        borrowTime.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+        borrowTime.setEditable(false);
+        borrowTime.setBorder(null);
+        borrowTime.setFocusable(false);
+        borrowTime.setOpaque(false);
+        add(borrowTime);
+        borrowTime.setBounds(160, 5, 260, 30);
+
+        //---- bookName ----
+        bookName.setText("\u4e66\u540d");
+        bookName.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+        bookName.setEditable(false);
+        bookName.setBorder(null);
+        bookName.setFocusable(false);
+        bookName.setOpaque(false);
+        add(bookName);
+        bookName.setBounds(30, 5, 130, 30);
+
+        //---- returnTime ----
+        returnTime.setText("\u5e94\u8fd8\u65f6\u95f4");
+        returnTime.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
+        returnTime.setEditable(false);
+        returnTime.setBorder(null);
+        returnTime.setFocusable(false);
+        returnTime.setOpaque(false);
+        add(returnTime);
+        returnTime.setBounds(420, 5, 300, 30);
 
         {
             // compute preferred size
@@ -124,5 +159,8 @@ public class BorrowInfoPanel extends JPanel{
     // Generated using JFormDesigner Evaluation license - unknown
     private JScrollPane scrollPane1;
     private JPanel panel1;
+    private JTextArea borrowTime;
+    private JTextArea bookName;
+    private JTextArea returnTime;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

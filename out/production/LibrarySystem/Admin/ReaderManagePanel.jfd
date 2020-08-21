@@ -1,10 +1,11 @@
-JFDML JFormDesigner: "7.0.1.0.272" Java: "1.8.0_212-release" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.2.4.305" Java: "11.0.7" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "this"
+			"background": new java.awt.Color( 255, 255, 255, 255 )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "textField1"
 				"toolTipText": "用户名/用户id"
@@ -37,7 +38,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 100
 				"x": 90
-				"y": 75
+				"y": 55
 			} )
 			add( new FormComponent( "javax.swing.JTextArea" ) {
 				name: "textArea2"
@@ -50,7 +51,7 @@ new FormModel {
 				"width": 70
 				"height": 25
 				"x": 215
-				"y": 80
+				"y": 60
 			} )
 			add( new FormComponent( "javax.swing.JTextArea" ) {
 				name: "textArea3"
@@ -62,31 +63,29 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"height": 25
 				"x": 215
-				"y": 120
+				"y": 100
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "textField2"
 				"opaque": false
 				"background": &Color0 new java.awt.Color( 255, 255, 255, 255 )
-				"editable": false
 				"font": &Font1 new java.awt.Font( "Microsoft YaHei UI", 0, 16 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 430
 				"height": 25
 				"x": 305
-				"y": 80
+				"y": 60
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "textField3"
 				"opaque": false
 				"background": #Color0
-				"editable": false
 				"font": #Font1
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 430
 				"height": 25
 				"x": 305
-				"y": 120
+				"y": 100
 			} )
 			add( new FormComponent( "javax.swing.JTextArea" ) {
 				name: "textArea4"
@@ -99,7 +98,7 @@ new FormModel {
 				"width": 85
 				"height": 25
 				"x": 215
-				"y": 155
+				"y": 135
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
@@ -118,13 +117,12 @@ new FormModel {
 				name: "textField4"
 				"opaque": false
 				"background": #Color0
-				"editable": false
 				"font": #Font1
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 95
 				"height": 25
 				"x": 305
-				"y": 155
+				"y": 135
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button3"
@@ -141,6 +139,9 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
+				"verticalScrollBarPolicy": 22
+				"horizontalScrollBarPolicy": 31
+				"background": new java.awt.Color( 255, 255, 255, 255 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
 					"$columnSpecs": "0:1.0"
 					"$rowSpecs": "0:1.0"
@@ -154,6 +155,48 @@ new FormModel {
 				"y": 200
 				"width": 855
 				"height": 210
+			} )
+			add( new FormComponent( "javax.swing.JTextArea" ) {
+				name: "returnTime"
+				"text": "应还时间"
+				"font": &Font3 new java.awt.Font( "微软雅黑", 0, 16 )
+				"editable": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"focusable": false
+				"opaque": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 300
+				"height": 30
+				"x": 430
+				"y": 170
+			} )
+			add( new FormComponent( "javax.swing.JTextArea" ) {
+				name: "bookName"
+				"text": "书名"
+				"font": #Font3
+				"editable": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"focusable": false
+				"opaque": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 130
+				"height": 30
+				"x": 40
+				"y": 170
+			} )
+			add( new FormComponent( "javax.swing.JTextArea" ) {
+				name: "borrowTime"
+				"text": "借书时间"
+				"font": #Font3
+				"editable": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"focusable": false
+				"opaque": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 260
+				"height": 30
+				"x": 170
+				"y": 170
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 15, 115 )

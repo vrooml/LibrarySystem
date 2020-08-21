@@ -514,7 +514,7 @@ public class DBConnect {
                 recordVector.add(new Record(
                         0,
                         resultSet.getInt(2),
-                        0,
+                        Integer.parseInt(readerId),
                         resultSet.getString(1),
                         resultSet.getString(3),
                         resultSet.getString(4)

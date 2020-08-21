@@ -43,6 +43,7 @@ public class ReaderFrame extends JFrame{
         });
         borrowInfoButton.addActionListener(e->{
             cardLayout.show(cardPanel,"borrow");
+            borrowInfoPanel.update();
         });
     }
 
@@ -102,12 +103,6 @@ public class ReaderFrame extends JFrame{
         //======== cardPanel ========
         {
             cardPanel.setOpaque(false);
-            cardPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-            ( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-            . TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,cardPanel. getBorder( )) ); cardPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-            propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( )
-            ; }} );
             cardPanel.setLayout(new CardLayout());
         }
         contentPane.add(cardPanel);
@@ -148,5 +143,5 @@ public class ReaderFrame extends JFrame{
     private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public static void main(String args[]){new ReaderFrame("1");}
+    public static void main(String args[]){new ReaderFrame("14");}
 }

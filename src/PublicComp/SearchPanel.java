@@ -94,8 +94,8 @@ public class SearchPanel extends JPanel{
                     books.add(book);
                 }
 
+                panel1.removeAll();
                 for(int i=0;i<books.size();i++){
-                    panel1.removeAll();
                     c[0]=new GridBagConstraints();
                     if((i+1)%7==0){
                         c[0].gridwidth=GridBagConstraints.REMAINDER;
@@ -124,12 +124,6 @@ public class SearchPanel extends JPanel{
         //======== this ========
         setOpaque(false);
         setBackground(Color.white);
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
-        border.EmptyBorder(0,0,0,0), "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e",javax.swing.border.TitledBorder.CENTER
-        ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dialo\u0067",java.awt.Font
-        .BOLD,12),java.awt.Color.red), getBorder())); addPropertyChangeListener(
-        new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("borde\u0072"
-        .equals(e.getPropertyName()))throw new RuntimeException();}});
         setLayout(null);
 
         //---- textField1 ----
