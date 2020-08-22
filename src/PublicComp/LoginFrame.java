@@ -2,6 +2,7 @@ package PublicComp;/*
  * Created by JFormDesigner on Mon Jun 08 11:56:38 CST 2020
  */
 
+import Admin.AdminFrame;
 import PublicComp.RegisterFrame;
 import Reader.ReaderFrame;
 import Utils.DBConnect;
@@ -54,7 +55,7 @@ public class LoginFrame extends JFrame{
             else {     //管理员登录
                 loginStatue = db.adminLogin(id, password); //调用数据库管理员登陆接口
                 if(loginStatue == 0) {
-                    //new AdminFrame();
+                    new AdminFrame();
                     this.setVisible(false);  //登陆成功，隐藏当前窜口
                 }
             }
